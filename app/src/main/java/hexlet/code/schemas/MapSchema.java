@@ -1,10 +1,12 @@
 package hexlet.code.schemas;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class MapSchema extends BaseSchema{
     boolean ifSize = false;
     int size = 0;
+    //Map schemasCheck;
 
     public MapSchema range(int size) {
         this.ifSize = true;
@@ -17,6 +19,27 @@ public class MapSchema extends BaseSchema{
         if (ifSize == true && map.size() != size) {
             return false;
         }
+        if (schemasCheck != null && schemasCheck.isEmpty() == false) {
+            return isCheckMapByShechma(map);
+        }
         return true;
     }
+
+    private <T> boolean isCheckMapByShechma(Map<String, T> map) {
+        var entries = map.entrySet();
+        for (var entry : entries) {
+            //System.out.println(entry.getKey());
+            String sKey = entry.getKey();
+            var value = entry.getValue();
+
+            BaseSchema<T> schema = (BaseSchema<T>) schemasCheck.getOrDefault(sKey, null);
+            if (schema != null && schema.isValid(value) == false) {
+                return false;
+            }
+            //System.out.println(entry.getValue());
+        }
+        return true;
+    }
+
+
 }
