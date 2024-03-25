@@ -14,13 +14,13 @@ public class StringSchema extends BaseSchema {
     }
 
 
-    public StringSchema minLength(int minLengthNumber) {
-        this.minLengthNumber = minLengthNumber;
+    public StringSchema minLength(int minLengthNumberParam) {
+        this.minLengthNumber = minLengthNumberParam;
         return this;
     }
 
-    public StringSchema contains(String containsText) {
-        this.containsText = containsText;
+    public StringSchema contains(String containsTextParam) {
+        this.containsText = containsTextParam;
         return this;
     }
 
@@ -30,7 +30,7 @@ public class StringSchema extends BaseSchema {
         if (minLengthNumber != 0 && text.length() < minLengthNumber) {
             return false;
         }
-        if (containsText.isEmpty() == false && text.contains(containsText) == false) {
+        if (!containsText.isEmpty() && !text.contains(containsText)) {
             return false;
         }
         return true;

@@ -1,6 +1,6 @@
 package hexlet.code.schemas;
 
-public class NumberSchema extends BaseSchema{
+public class NumberSchema extends BaseSchema {
     boolean isRequired = false;
     boolean positive = false;
     boolean range = false;
@@ -24,10 +24,10 @@ public class NumberSchema extends BaseSchema{
     @Override
     public boolean isGetStaus(Object data) {
         Integer number = (Integer) data;
-        if (positive == true && number < 0) {
+        if (positive && number < 0) {
             return false;
         }
-        if (range == true && (number < minRange || number > maxRange)) {
+        if (range && (number < minRange || number > maxRange)) {
             return false;
         }
         return true;

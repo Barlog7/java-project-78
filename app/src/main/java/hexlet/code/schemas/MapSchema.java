@@ -1,25 +1,24 @@
 package hexlet.code.schemas;
 
-import java.util.HashMap;
 import java.util.Map;
 
-public class MapSchema extends BaseSchema{
+public class MapSchema extends BaseSchema {
     boolean ifSize = false;
     int size = 0;
     //Map schemasCheck;
 
-    public MapSchema range(int size) {
+    public MapSchema range(int sizeParam) {
         this.ifSize = true;
-        this.size = size;
+        this.size = sizeParam;
         return this;
     }
     @Override
     public boolean isGetStaus(Object data) {
         Map map = (Map) data;
-        if (ifSize == true && map.size() != size) {
+        if (ifSize && map.size() != size) {
             return false;
         }
-        if (schemasCheck != null && schemasCheck.isEmpty() == false) {
+        if (schemasCheck != null && !schemasCheck.isEmpty()) {
             return isCheckMapByShechma(map);
         }
         return true;
@@ -33,7 +32,7 @@ public class MapSchema extends BaseSchema{
             var value = entry.getValue();
 
             BaseSchema<T> schema = (BaseSchema<T>) schemasCheck.getOrDefault(sKey, null);
-            if (schema != null && schema.isValid(value) == false) {
+            if (schema != null && !schema.isValid(value)) {
                 return false;
             }
             //System.out.println(entry.getValue());

@@ -13,12 +13,12 @@ public abstract class BaseSchema<T> {
     }
 
     public boolean isValid(T data) {
-        if (isRequired == true && data == null) {
+        if (isRequired && data == null) {
             return false;
         }
 
         boolean status = isGetStaus(data);
-        if (status == false) {
+        if (!status) {
             return false;
         }
         return true;
