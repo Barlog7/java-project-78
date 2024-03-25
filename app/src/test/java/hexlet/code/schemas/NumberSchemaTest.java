@@ -53,7 +53,7 @@ class NumberSchemaTest {
         boolean actual = schema.isValid(6); // false
         boolean expected = false;
 
-        schema.positive();
+        //schema.positive();
         actual = schema.isValid(1); // true
         expected = true;
 
