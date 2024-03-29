@@ -2,8 +2,8 @@ package hexlet.code.schemas;
 
 public final class StringSchema extends BaseSchema {
 
-    int minLengthNumber = 0;
-    String containsText = "";
+    private int minLengthNumber = 0;
+    private String containsText = "";
 
     public StringSchema() {
     }

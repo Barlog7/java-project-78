@@ -11,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class StringSchemaTest {
 
-    Validator v;
-    StringSchema schema;
+    private Validator v;
+    private StringSchema schema;
     @BeforeEach
     public void beforeEach() {
         v = new Validator();
