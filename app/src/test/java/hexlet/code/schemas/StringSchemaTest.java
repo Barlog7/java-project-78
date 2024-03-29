@@ -4,9 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import hexlet.code.Validator;
-//import hexlet.code.schemas.StringSchema;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class StringSchemaTest {
 
@@ -19,73 +19,46 @@ class StringSchemaTest {
     }
     @Test
     public void testValidCheckNull() {
-        //var v = new Validator();
 
-        //var schema = v.string();
-        boolean actual = schema.isValid(""); // true
-        boolean expected = true;
+        assertTrue(schema.isValid(""));
 
-        assertEquals(expected, actual);
-
-        actual = schema.isValid(null);
-        expected = true;
-        assertEquals(expected, actual);
+        assertTrue(schema.isValid(null));
     }
     @Test
     public void testValidCheckRequaerd() {
-        //var v = new Validator();
 
-        //var schema = v.string();
         schema.required();
-        boolean actual = schema.isValid(null); // true
-        boolean expected = false;
+        assertFalse(schema.isValid(null));
 
-        assertEquals(expected, actual);
+        assertTrue(schema.isValid("what does the fox say"));
 
-        /*actual = schema.isValid("");
-        expected = false;
-        assertEquals(expected, actual);*/
-
-        actual = schema.isValid("what does the fox say");
-        expected = true;
-        assertEquals(expected, actual);
-
-        actual = schema.isValid("hexlet");
-        expected = true;
-        assertEquals(expected, actual);
+        assertTrue(schema.isValid("hexlet"));
     }
     @Test
     public void testValidCheckContains() {
-        boolean actual = schema.contains("wh").isValid("what does the fox say"); // true
-        boolean expected = true;
-        assertEquals(expected, actual);
-        actual = schema.contains("what").isValid("what does the fox say"); // true
-        expected = true;
-        assertEquals(expected, actual);
-        actual = schema.contains("whatthe").isValid("what does the fox say"); // false
-        expected = false;
-        assertEquals(expected, actual);
 
-        actual = schema.isValid("what does the fox say"); // false
-        expected = false;
-        assertEquals(expected, actual);
+        assertTrue(schema.contains("wh").isValid("what does the fox say"));
+
+        assertTrue(schema.contains("what").isValid("what does the fox say"));
+
+        assertFalse(schema.contains("whatthe").isValid("what does the fox say"));
+
+        assertFalse(schema.isValid("what does the fox say"));
     }
     @Test
     public void testValidCheckMinLength() {
-        boolean actual = schema.minLength(10).isValid("what does the fox say"); // true
-        boolean expected = true;
-        assertEquals(expected, actual);
-        actual = schema.minLength(100).isValid("what does the fox say"); // false
-        expected = false;
-        assertEquals(expected, actual);
-        actual = schema.minLength(10).minLength(4).isValid("Hexlet");
-        expected = true;
-        assertEquals(expected, actual);
+        assertTrue(schema.minLength(10).isValid("what does the fox say"));
+
+        assertFalse(schema.minLength(100).isValid("what does the fox say"));
+
+        assertTrue(schema.minLength(10).minLength(4).isValid("Hexlet"));
     }
     @Test
     public void testValidCheckAll() {
-        boolean actual = schema.required().minLength(5).contains("hex").isValid("hex dex pex lex");
-        boolean expected = true;
-        assertEquals(expected, actual);
+        assertTrue(schema.required().minLength(5).contains("hex").isValid("hex dex pex lex"));
+
+        assertFalse(schema.required().minLength(25).contains("hex").isValid("hex dex pex lex"));
+
+        assertFalse(schema.required().minLength(5).contains("apex").isValid("hex dex pex lex"));
     }
 }

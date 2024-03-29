@@ -1,7 +1,7 @@
 package hexlet.code.schemas;
 
 public class StringSchema extends BaseSchema {
-    //boolean isRequired = false;
+
     int minLengthNumber = 0;
     String containsText = "";
 
@@ -35,17 +35,5 @@ public class StringSchema extends BaseSchema {
         }
         return true;
     }
-/*    public boolean isValid(String text) {
-        if (isRequired == true && (text == null || text.isEmpty())) {
-            return false;
-        }
-        if (minLengthNumber != 0 && text.length() < minLengthNumber) {
-            return false;
-        }
-        if (containsText.isEmpty() == false && text.contains(containsText) == false) {
-            return false;
-        }
-        return true;
-    }
-*/
+
 }

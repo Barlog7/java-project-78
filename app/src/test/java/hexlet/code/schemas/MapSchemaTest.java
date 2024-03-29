@@ -7,7 +7,8 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class MapSchemaTest {
 
@@ -23,27 +24,18 @@ class MapSchemaTest {
 
         var data = new HashMap<String, String>();
         data.put("key1", "value1");
-        boolean actual = schema.isValid(data); // true
-        boolean expected = true;
-
-        assertEquals(expected, actual);
+        assertTrue(schema.isValid(data));
     }
     @Test
     void isGetStausCheckRequaerd() {
-        boolean actual = schema.isValid(null); // false
-        boolean expected = true;
+
+        assertTrue(schema.isValid(null));
 
         schema.required();
-        actual = schema.isValid(null); // false
-        expected = false;
-
-        assertEquals(expected, actual);
+        assertFalse(schema.isValid(null));
 
         schema.required();
-        actual = schema.isValid(new HashMap<>()); // false
-        expected = true;
-
-        assertEquals(expected, actual);
+        assertTrue(schema.isValid(new HashMap<>()));
     }
 
     @Test
@@ -52,16 +44,10 @@ class MapSchemaTest {
         schema.range(1);
         var data = new HashMap<String, String>();
         data.put("key1", "value1");
-        boolean actual = schema.isValid(data); // false
-        boolean expected = true;
-
-        assertEquals(expected, actual);
+        assertTrue(schema.isValid(data));
 
         schema.range(2);
-        actual = schema.isValid(data); // false
-        expected = false;
-
-        assertEquals(expected, actual);
+        assertFalse(schema.isValid(data));
     }
     @Test
     void isGetStausCheckShapeNumber() {
@@ -75,24 +61,17 @@ class MapSchemaTest {
         Map<String, Integer> human1 = new HashMap<>();
         human1.put("firstNumber", 2);
         human1.put("lastNumber", 3);
-        boolean actual = schema.isValid(human1);
-        boolean expected = true;
-        assertEquals(expected, actual);
+        assertTrue(schema.isValid(human1));
 
         Map<String, Integer> human2 = new HashMap<>();
         human2.put("firstNumber", 6);
         human2.put("lastNumber", null);
-        actual = schema.isValid(human2); // false
-        expected = false;
-        assertEquals(expected, actual);
+        assertFalse(schema.isValid(human2));
 
         Map<String, Integer> human3 = new HashMap<>();
         human3.put("firstNumber", 2);
         human3.put("lastNumber", -1);
-        actual = schema.isValid(human3); // false
-        expected = false;
-        //assertEquals(expected, actual);
-
+        assertFalse(schema.isValid(human3));
     }
     @Test
     void isGetStausCheckShapeString() {
@@ -106,23 +85,17 @@ class MapSchemaTest {
         Map<String, String> human1 = new HashMap<>();
         human1.put("firstName", "John");
         human1.put("lastName", "Smith");
-        boolean actual = schema.isValid(human1);
-        boolean expected = true;
-        assertEquals(expected, actual);
+        assertTrue(schema.isValid(human1));
 
         Map<String, String> human2 = new HashMap<>();
         human2.put("firstName", "John");
         human2.put("lastName", null);
-        actual = schema.isValid(human2); // false
-        expected = false;
-        assertEquals(expected, actual);
+        assertFalse(schema.isValid(human2));
 
         Map<String, String> human3 = new HashMap<>();
         human3.put("firstName", "Anna");
         human3.put("lastName", "B");
-        actual = schema.isValid(human3); // false
-        expected = false;
-        assertEquals(expected, actual);
+        assertFalse(schema.isValid(human3));
 
     }
 }
