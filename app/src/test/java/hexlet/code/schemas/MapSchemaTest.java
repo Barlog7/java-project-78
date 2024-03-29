@@ -41,12 +41,12 @@ class MapSchemaTest {
     @Test
     void isGetStausCheckRange() {
 
-        schema.range(1);
+        schema.sizeof(1);
         var data = new HashMap<String, String>();
         data.put("key1", "value1");
         assertTrue(schema.isValid(data));
 
-        schema.range(2);
+        schema.sizeof(2);
         assertFalse(schema.isValid(data));
     }
     @Test

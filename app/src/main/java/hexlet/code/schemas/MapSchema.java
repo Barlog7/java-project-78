@@ -6,8 +6,7 @@ public class MapSchema extends BaseSchema {
     boolean ifSize = false;
     int size = 0;
 
-
-    public MapSchema range(int sizeParam) {
+    public MapSchema sizeof(int sizeParam) {
         this.ifSize = true;
         this.size = sizeParam;
         return this;
