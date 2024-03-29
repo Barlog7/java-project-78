@@ -11,7 +11,9 @@ public abstract class BaseSchema<T> {
     private boolean isRequired = false;
     Map<String, BaseSchema<T>> schemasCheck;
 
-    public abstract BaseSchema required();
+    public BaseSchema required() {
+        return this;
+    }
 /*
     {
         this.isRequired = true;
