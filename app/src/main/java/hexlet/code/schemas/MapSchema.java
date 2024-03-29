@@ -2,9 +2,9 @@ package hexlet.code.schemas;
 
 import java.util.Map;
 
-public class MapSchema extends BaseSchema {
-    boolean ifSize = false;
-    int size = 0;
+public final class MapSchema extends BaseSchema {
+    private boolean ifSize = false;
+    private int size = 0;
 
     public MapSchema sizeof(int sizeParam) {
         this.ifSize = true;
