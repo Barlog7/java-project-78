@@ -11,6 +11,13 @@ public final class MapSchema extends BaseSchema {
         this.size = sizeParam;
         return this;
     }
+
+    @Override
+    public MapSchema required() {
+        this.setRequired(true);
+        return this;
+    }
+
     @Override
     public boolean isGetStaus(Object data) {
         Map map = (Map) data;

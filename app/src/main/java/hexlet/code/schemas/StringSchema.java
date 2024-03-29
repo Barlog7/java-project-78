@@ -8,10 +8,10 @@ public final class StringSchema extends BaseSchema {
     public StringSchema() {
     }
 
-    public StringSchema required() {
+/*    public StringSchema required() {
         this.isRequired = true;
         return this;
-    }
+    }*/
 
 
     public StringSchema minLength(int minLengthNumberParam) {
@@ -30,7 +30,7 @@ public final class StringSchema extends BaseSchema {
             return false;
         }
         String text = (String) data;
-        if (isRequired && text == "") {
+        if (isRequired() && text == "") {
             return false;
         }
         if (minLengthNumber != 0 && text.length() < minLengthNumber) {
@@ -40,6 +40,11 @@ public final class StringSchema extends BaseSchema {
             return false;
         }
         return true;
+    }
+    @Override
+    public StringSchema required()   {
+        this.setRequired(true);
+        return this;
     }
 
 }

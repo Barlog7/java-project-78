@@ -38,5 +38,10 @@ public final class NumberSchema extends BaseSchema {
         }
         return true;
     }
-
+    @Override
+    public NumberSchema required()   {
+        this.setRequired(true);
+        return this;
+    }
 }
+

@@ -4,13 +4,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class BaseSchema<T> {
-    boolean isRequired = false;
+    public void setRequired(boolean required) {
+        isRequired = required;
+    }
+
+    private boolean isRequired = false;
     Map<String, BaseSchema<T>> schemasCheck;
 
-    public BaseSchema required() {
+    public abstract BaseSchema required();
+/*
+    {
         this.isRequired = true;
         return this;
     }
+*/
 
     public boolean isValid(T data) {
         if (isRequired && data == null) {
@@ -28,6 +35,10 @@ public abstract class BaseSchema<T> {
     public boolean shape(Map<String, BaseSchema<T>> map) {
         schemasCheck = new HashMap<>(map);
         return true;
+    }
+
+    public boolean isRequired() {
+        return isRequired;
     }
 }
 
