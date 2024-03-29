@@ -9,7 +9,16 @@ public abstract class BaseSchema<T> {
     }
 
     private boolean isRequired = false;
-    Map<String, BaseSchema<T>> schemasCheck;
+
+    public Map<String, BaseSchema<T>> getSchemasCheck() {
+        return schemasCheck;
+    }
+
+    public void setSchemasCheck(Map<String, BaseSchema<T>> schemasCheck) {
+        this.schemasCheck = schemasCheck;
+    }
+
+    private Map<String, BaseSchema<T>> schemasCheck;
 
     public BaseSchema required() {
         return this;

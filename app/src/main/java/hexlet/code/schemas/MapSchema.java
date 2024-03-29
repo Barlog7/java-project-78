@@ -24,7 +24,7 @@ public final class MapSchema extends BaseSchema {
         if (ifSize && map.size() != size) {
             return false;
         }
-        if (schemasCheck != null && !schemasCheck.isEmpty()) {
+        if (getSchemasCheck() != null && !getSchemasCheck().isEmpty()) {
             return isCheckMapByShechma(map);
         }
         return true;
@@ -37,7 +37,7 @@ public final class MapSchema extends BaseSchema {
             String sKey = entry.getKey();
             var value = entry.getValue();
 
-            BaseSchema<T> schema = (BaseSchema<T>) schemasCheck.getOrDefault(sKey, null);
+            BaseSchema<T> schema = (BaseSchema<T>) getSchemasCheck().getOrDefault(sKey, null);
             if (schema != null && !schema.isValid(value)) {
                 return false;
             }
