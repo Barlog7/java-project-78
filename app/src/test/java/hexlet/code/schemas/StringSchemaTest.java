@@ -8,6 +8,7 @@ import hexlet.code.Validator;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+
 class StringSchemaTest {
 
     Validator v;
@@ -29,6 +30,8 @@ class StringSchemaTest {
 
         schema.required();
         assertFalse(schema.isValid(null));
+
+        assertFalse(schema.isValid(""));
 
         assertTrue(schema.isValid("what does the fox say"));
 
@@ -64,4 +67,5 @@ class StringSchemaTest {
 
         assertFalse(schema.required().minLength(5).contains("apex").isValid("hex dex pex lex"));
     }
+
 }

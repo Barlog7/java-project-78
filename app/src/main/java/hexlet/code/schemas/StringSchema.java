@@ -30,6 +30,9 @@ public class StringSchema extends BaseSchema {
             return false;
         }
         String text = (String) data;
+        if (isRequired && text == "") {
+            return false;
+        }
         if (minLengthNumber != 0 && text.length() < minLengthNumber) {
             return false;
         }
