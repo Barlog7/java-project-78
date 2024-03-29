@@ -36,6 +36,7 @@ class NumberSchemaTest {
 
         schema.positive();
         assertTrue(schema.isValid(1));
+        assertFalse(schema.isValid(null));
     }
     @Test
     void isGetStausCheckRange() {
@@ -44,5 +45,13 @@ class NumberSchemaTest {
         assertFalse(schema.isValid(6));
 
         assertTrue(schema.isValid(1));
+        assertFalse(schema.isValid(null));
+    }
+    @Test
+    void isGetStausCheckAll() {
+        schema.positive();
+        schema.range(1, 5);
+        assertFalse(schema.isValid(-1));
+        assertTrue(schema.isValid(2));
     }
 }

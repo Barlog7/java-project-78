@@ -44,6 +44,7 @@ class StringSchemaTest {
         assertFalse(schema.contains("whatthe").isValid("what does the fox say"));
 
         assertFalse(schema.isValid("what does the fox say"));
+        assertFalse(schema.isValid(null));
     }
     @Test
     public void testValidCheckMinLength() {
@@ -52,6 +53,8 @@ class StringSchemaTest {
         assertFalse(schema.minLength(100).isValid("what does the fox say"));
 
         assertTrue(schema.minLength(10).minLength(4).isValid("Hexlet"));
+
+        assertFalse(schema.isValid(null));
     }
     @Test
     public void testValidCheckAll() {
