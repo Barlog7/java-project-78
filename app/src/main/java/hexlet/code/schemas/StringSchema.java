@@ -26,6 +26,9 @@ public class StringSchema extends BaseSchema {
 
     @Override
     public boolean isGetStaus(Object data) {
+        if (data == null && (minLengthNumber != 0 || !containsText.isEmpty())) {
+            return false;
+        }
         String text = (String) data;
         if (minLengthNumber != 0 && text.length() < minLengthNumber) {
             return false;
