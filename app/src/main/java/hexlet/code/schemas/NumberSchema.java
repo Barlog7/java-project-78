@@ -23,7 +23,10 @@ public class NumberSchema extends BaseSchema {
 
     @Override
     public boolean isGetStaus(Object data) {
-        if (data == null && (positive || range)) {
+        if (data == null && (range)) {
+            return false;
+        }
+        if (data == null && positive) {
             return true;
         }
         Integer number = (Integer) data;
