@@ -4,33 +4,28 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class BaseSchema<T> {
-    public void setRequired(boolean required) {
-        isRequired = required;
-    }
 
     private boolean isRequired = false;
-
-    public Map<String, BaseSchema<T>> getSchemasCheck() {
-        return schemasCheck;
+    public final void setRequired(boolean required) {
+        isRequired = required;
     }
-
-    public void setSchemasCheck(Map<String, BaseSchema<T>> schemasCheck) {
-        this.schemasCheck = schemasCheck;
+    public final boolean isRequired() {
+        return isRequired;
     }
 
     private Map<String, BaseSchema<T>> schemasCheck;
-
-    public BaseSchema required() {
-        return this;
+    public final Map<String, BaseSchema<T>> getSchemasCheck() {
+        return schemasCheck;
     }
-/*
-    {
-        this.isRequired = true;
-        return this;
+    public final void setSchemasCheck(Map<String, BaseSchema<T>> schemasCheck) {
+        this.schemasCheck = schemasCheck;
     }
-*/
 
-    public boolean isValid(T data) {
+    /*public BaseSchema required() {
+        return this;
+    }*/
+    public abstract BaseSchema required();
+    public final boolean isValid(T data) {
         if (isRequired && data == null) {
             return false;
         }
@@ -43,13 +38,9 @@ public abstract class BaseSchema<T> {
     }
     public abstract boolean isGetStaus(T data);
 
-    public boolean shape(Map<String, BaseSchema<T>> map) {
+    public final boolean shape(Map<String, BaseSchema<T>> map) {
         schemasCheck = new HashMap<>(map);
         return true;
-    }
-
-    public boolean isRequired() {
-        return isRequired;
     }
 }
 
