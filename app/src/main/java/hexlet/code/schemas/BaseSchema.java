@@ -17,8 +17,8 @@ public abstract class BaseSchema<T> {
     public final Map<String, BaseSchema<T>> getSchemasCheck() {
         return schemasCheck;
     }
-    public final void setSchemasCheck(Map<String, BaseSchema<T>> schemasCheck) {
-        this.schemasCheck = schemasCheck;
+    public final void setSchemasCheck(Map<String, BaseSchema<T>> schemasCheckCurent) {
+        this.schemasCheck = schemasCheckCurent;
     }
 
     /*public BaseSchema required() {
