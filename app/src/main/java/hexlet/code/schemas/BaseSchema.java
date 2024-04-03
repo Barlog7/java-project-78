@@ -47,7 +47,7 @@ public abstract class BaseSchema<T> {
         for (var value : values) {
             if (!value.test(data)) {
                 return false;
-            };
+            }
         }
         return true;
     }
