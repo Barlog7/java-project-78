@@ -1,5 +1,7 @@
 package hexlet.code.schemas;
 
+import java.util.function.Predicate;
+
 public final class StringSchema extends BaseSchema {
 
     private int minLengthNumber = 0;
@@ -8,43 +10,42 @@ public final class StringSchema extends BaseSchema {
     public StringSchema() {
     }
 
-/*    public StringSchema required() {
-        this.isRequired = true;
-        return this;
-    }*/
-
-
     public StringSchema minLength(int minLengthNumberParam) {
         this.minLengthNumber = minLengthNumberParam;
+        Predicate<Object> fn = x -> {
+            if (x == null) {
+                return false;
+            }
+            String text = (String) x;
+            if (minLengthNumber != 0 && text.length() < minLengthNumber) {
+                return false;
+            }
+            return true;
+        };
+        addCheck("minLengthNumber", fn);
         return this;
     }
 
     public StringSchema contains(String containsTextParam) {
+
         this.containsText = containsTextParam;
+        Predicate<Object> fn = x -> {
+            if (x == null) {
+                return false;
+            }
+            String text = (String) x;
+            if (!containsText.isEmpty() && !text.contains(containsText)) {
+                return false;
+            }
+            return true;
+        };
+        addCheck("contains", fn);
         return this;
     }
 
     @Override
-    public boolean isGetStaus(Object data) {
-        if (data == null && (minLengthNumber != 0 || !containsText.isEmpty())) {
-            return false;
-        }
-        String text = (String) data;
-        if (isRequired() && text == "") {
-            return false;
-        }
-        if (minLengthNumber != 0 && text.length() < minLengthNumber) {
-            return false;
-        }
-        if (!containsText.isEmpty() && !text.contains(containsText)) {
-            return false;
-        }
-        return true;
-    }
-    @Override
     public StringSchema required()   {
-        this.setRequired(true);
-        return this;
+        return (StringSchema) super.required();
     }
 
 }

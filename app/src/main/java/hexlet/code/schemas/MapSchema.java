@@ -1,33 +1,46 @@
 package hexlet.code.schemas;
 
 import java.util.Map;
+import java.util.function.Predicate;
 
 public final class MapSchema extends BaseSchema {
-    private boolean ifSize = false;
+
     private int size = 0;
 
+    public MapSchema() {
+        Predicate<Object> fn = x -> {
+            if (x == null) {
+                return true;
+            }
+            Map map = (Map) x;
+            if (getSchemasCheck() != null && !getSchemasCheck().isEmpty()) {
+                return isCheckMapByShechma(map);
+            }
+            return true;
+        };
+        addCheck("isCheckMapByShechma", fn);
+    }
+
     public MapSchema sizeof(int sizeParam) {
-        this.ifSize = true;
+
         this.size = sizeParam;
+        Predicate<Object> fn = x -> {
+            if (x == null) {
+                return false;
+            }
+            Map map = (Map) x;
+            if (map.size() != size) {
+                return false;
+            }
+            return true;
+        };
+        addCheck("sizeof", fn);
         return this;
     }
 
     @Override
     public MapSchema required() {
-        this.setRequired(true);
-        return this;
-    }
-
-    @Override
-    public boolean isGetStaus(Object data) {
-        Map map = (Map) data;
-        if (ifSize && map.size() != size) {
-            return false;
-        }
-        if (getSchemasCheck() != null && !getSchemasCheck().isEmpty()) {
-            return isCheckMapByShechma(map);
-        }
-        return true;
+        return (MapSchema) super.required();
     }
 
     private <T> boolean isCheckMapByShechma(Map<String, T> map) {

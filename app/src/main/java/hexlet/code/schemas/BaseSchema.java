@@ -1,42 +1,56 @@
 package hexlet.code.schemas;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.function.Predicate;
 
 public abstract class BaseSchema<T> {
 
-    private boolean isRequired = false;
-    public final void setRequired(boolean required) {
-        isRequired = required;
-    }
-    public final boolean isRequired() {
-        return isRequired;
-    }
+    protected Map<String, Predicate<Object>> checks = new LinkedHashMap<>();
 
     private Map<String, BaseSchema<T>> schemasCheck;
+
+    protected final void addCheck(String key, Predicate<Object> pred) {
+        checks.put(key, pred);
+    }
+
     public final Map<String, BaseSchema<T>> getSchemasCheck() {
         return schemasCheck;
     }
+
     public final void setSchemasCheck(Map<String, BaseSchema<T>> schemasCheckCurent) {
         this.schemasCheck = schemasCheckCurent;
     }
 
-    /*public BaseSchema required() {
-        return this;
-    }*/
-    public abstract BaseSchema required();
-    public final boolean isValid(T data) {
-        if (isRequired && data == null) {
-            return false;
-        }
+    //public abstract BaseSchema required();
 
-        boolean status = isGetStaus(data);
-        if (!status) {
-            return false;
+    public BaseSchema required() {
+        Predicate<Object> fn = x -> {
+            if (x == null) {
+                return false;
+            }
+            if (x.getClass() == String.class && ((String) x).isEmpty()) {
+                return false;
+            }
+            return true;
+        };
+        addCheck("required", fn);
+        return this;
+    }
+
+    public final boolean isValid(T data) {
+        if (checks.isEmpty()) {
+            return true;
+        }
+        var values = checks.values();
+        for (var value : values) {
+            if (!value.test(data)) {
+                return false;
+            };
         }
         return true;
     }
-    public abstract boolean isGetStaus(T data);
 
     public final boolean shape(Map<String, BaseSchema<T>> map) {
         schemasCheck = new HashMap<>(map);
