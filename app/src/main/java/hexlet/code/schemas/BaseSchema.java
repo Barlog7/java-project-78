@@ -25,6 +25,11 @@ public abstract class BaseSchema<T> {
 
     //public abstract BaseSchema required();
 
+    /**
+     * <p>required() — делает данные обязательными для заполнения. Иными словами добавляет в схему ограничение, которое не позволяет использовать null или пустую строку в качестве значения
+     * Метод переопределяется в дочерних классах для изменения возвращаемой схемы 
+     * </p>
+     */
     public BaseSchema required() {
         Predicate<Object> fn = x -> {
             if (x == null) {
