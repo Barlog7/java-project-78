@@ -1,6 +1,5 @@
 package hexlet.code.schemas;
 
-//import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Predicate;
@@ -9,19 +8,9 @@ public abstract class BaseSchema<T> {
 
     protected Map<String, Predicate<T>> checks = new LinkedHashMap<>();
 
-    //protected Map<String, BaseSchema<T>> schemasCheck;
-
     protected final void addCheck(String key, Predicate<T> pred) {
         checks.put(key, pred);
     }
-
-    /*public final Map<String, BaseSchema<T>> getSchemasCheck() {
-        return schemasCheck;
-    }*/
-
-/*    public final void setSchemasCheck(Map<String, BaseSchema<T>> schemasCheckCurent) {
-        this.schemasCheck = schemasCheckCurent;
-    }*/
 
     /**
      * <p>required() — делает данные обязательными для заполнения.
@@ -58,9 +47,5 @@ public abstract class BaseSchema<T> {
         return true;
     }
 
-/*    public final boolean shape(Map<String, BaseSchema<T>> map) {
-        schemasCheck = new HashMap<>(map);
-        return true;
-    }*/
 }
 

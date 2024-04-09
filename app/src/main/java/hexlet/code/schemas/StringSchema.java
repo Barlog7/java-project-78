@@ -17,11 +17,7 @@ public final class StringSchema extends BaseSchema<String> {
                 return false;
             }
             return !(minLengthNumber != 0 && x.length() < minLengthNumber);
-            //String text = (String) x;
-/*            if (minLengthNumber != 0 && x.length() < minLengthNumber) {
-                return false;
-            }
-            return true;*/
+
         };
         addCheck("minLengthNumber", fn);
         return this;
@@ -35,11 +31,7 @@ public final class StringSchema extends BaseSchema<String> {
                 return false;
             }
             return !(!containsText.isEmpty() && !x.contains(containsText));
-            //String text = (String) x;
-/*            if (!containsText.isEmpty() && !x.contains(containsText)) {
-                return false;
-            }
-            return true;*/
+
         };
         addCheck("contains", fn);
         return this;

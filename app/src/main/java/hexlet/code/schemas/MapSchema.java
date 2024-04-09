@@ -8,8 +8,7 @@ public final class MapSchema extends BaseSchema<Map<?, ?>> {
 
     protected Map<String, ?> schemasCheck;
     private int size = 0;
-    //private Map<String, MapSchema> schemasCheck;
-    //Map<String, BaseSchema<T>> schemasCheck;
+
     public MapSchema() {
         Predicate<Map<?, ?>> fn = x -> {
             if (x == null) {
@@ -33,10 +32,7 @@ public final class MapSchema extends BaseSchema<Map<?, ?>> {
             }
             Map map = (Map) x;
             return !(map.size() != size);
-/*            if (map.size() != size) {
-                return false;
-            }
-            return true;*/
+
         };
         addCheck("sizeof", fn);
         return this;
@@ -63,12 +59,6 @@ public final class MapSchema extends BaseSchema<Map<?, ?>> {
         return true;
     }
 
-/*
-    public final boolean shape(Map<String, MapSchema map) {
-        schemasCheck = new HashMap<>(map);
-        return true;
-    }
-*/
     public <T> boolean shape(Map<String, BaseSchema<T>> map) {
         schemasCheck = new HashMap<>(map);
         return true;
