@@ -7,21 +7,21 @@ import java.util.function.Predicate;
 
 public abstract class BaseSchema<T> {
 
-    protected Map<String, Predicate<Object>> checks = new LinkedHashMap<>();
+    protected Map<String, Predicate<T>> checks = new LinkedHashMap<>();
 
-    private Map<String, BaseSchema<T>> schemasCheck;
+    //protected Map<String, BaseSchema<T>> schemasCheck;
 
-    protected final void addCheck(String key, Predicate<Object> pred) {
+    protected final void addCheck(String key, Predicate<T> pred) {
         checks.put(key, pred);
     }
 
-    public final Map<String, BaseSchema<T>> getSchemasCheck() {
+    /*public final Map<String, BaseSchema<T>> getSchemasCheck() {
         return schemasCheck;
-    }
+    }*/
 
-    public final void setSchemasCheck(Map<String, BaseSchema<T>> schemasCheckCurent) {
+/*    public final void setSchemasCheck(Map<String, BaseSchema<T>> schemasCheckCurent) {
         this.schemasCheck = schemasCheckCurent;
-    }
+    }*/
 
     /**
      * <p>required() — делает данные обязательными для заполнения.
@@ -32,7 +32,7 @@ public abstract class BaseSchema<T> {
      * </p>
      */
     public BaseSchema required() {
-        Predicate<Object> fn = x -> {
+        Predicate<T> fn = x -> {
             if (x == null) {
                 return false;
             }
@@ -58,9 +58,9 @@ public abstract class BaseSchema<T> {
         return true;
     }
 
-    public final boolean shape(Map<String, BaseSchema<T>> map) {
+/*    public final boolean shape(Map<String, BaseSchema<T>> map) {
         schemasCheck = new HashMap<>(map);
         return true;
-    }
+    }*/
 }
 

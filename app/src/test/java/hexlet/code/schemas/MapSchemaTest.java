@@ -53,7 +53,7 @@ class MapSchemaTest {
     void isGetStausCheckShapeNumber() {
 
 
-        Map<String, BaseSchema<String>> schemas = new HashMap<>();
+        Map<String, BaseSchema<Integer>> schemas = new HashMap<>();
         schemas.put("firstNumber", v.number().range(1, 5));
         schemas.put("lastNumber", v.number().positive());
         schema.shape(schemas);

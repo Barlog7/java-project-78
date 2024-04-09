@@ -53,5 +53,10 @@ class NumberSchemaTest {
         schema.range(1, 5);
         assertFalse(schema.isValid(-1));
         assertTrue(schema.isValid(2));
+        //assertTrue(schema.positive().range(1, 5).isValid(2));
+    }
+    @Test
+    void isGetStausCheckAllParam() {
+        assertTrue(schema.positive().range(1, 5).isValid(2));
     }
 }

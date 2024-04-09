@@ -2,7 +2,7 @@ package hexlet.code.schemas;
 
 import java.util.function.Predicate;
 
-public final class StringSchema extends BaseSchema {
+public final class StringSchema extends BaseSchema<String> {
 
     private int minLengthNumber = 0;
     private String containsText = "";
@@ -12,15 +12,16 @@ public final class StringSchema extends BaseSchema {
 
     public StringSchema minLength(int minLengthNumberParam) {
         this.minLengthNumber = minLengthNumberParam;
-        Predicate<Object> fn = x -> {
+        Predicate<String> fn = x -> {
             if (x == null) {
                 return false;
             }
-            String text = (String) x;
-            if (minLengthNumber != 0 && text.length() < minLengthNumber) {
+            return !(minLengthNumber != 0 && x.length() < minLengthNumber);
+            //String text = (String) x;
+/*            if (minLengthNumber != 0 && x.length() < minLengthNumber) {
                 return false;
             }
-            return true;
+            return true;*/
         };
         addCheck("minLengthNumber", fn);
         return this;
@@ -29,15 +30,16 @@ public final class StringSchema extends BaseSchema {
     public StringSchema contains(String containsTextParam) {
 
         this.containsText = containsTextParam;
-        Predicate<Object> fn = x -> {
+        Predicate<String> fn = x -> {
             if (x == null) {
                 return false;
             }
-            String text = (String) x;
-            if (!containsText.isEmpty() && !text.contains(containsText)) {
+            return !(!containsText.isEmpty() && !x.contains(containsText));
+            //String text = (String) x;
+/*            if (!containsText.isEmpty() && !x.contains(containsText)) {
                 return false;
             }
-            return true;
+            return true;*/
         };
         addCheck("contains", fn);
         return this;

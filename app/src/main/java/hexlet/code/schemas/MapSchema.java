@@ -1,19 +1,22 @@
 package hexlet.code.schemas;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-public final class MapSchema extends BaseSchema {
+public final class MapSchema extends BaseSchema<Map<?, ?>> {
 
+    protected Map<String, ?> schemasCheck;
     private int size = 0;
-
+    //private Map<String, MapSchema> schemasCheck;
+    //Map<String, BaseSchema<T>> schemasCheck;
     public MapSchema() {
-        Predicate<Object> fn = x -> {
+        Predicate<Map<?, ?>> fn = x -> {
             if (x == null) {
                 return true;
             }
             Map map = (Map) x;
-            if (getSchemasCheck() != null && !getSchemasCheck().isEmpty()) {
+            if (schemasCheck != null && !schemasCheck.isEmpty()) {
                 return isCheckMapByShechma(map);
             }
             return true;
@@ -24,15 +27,16 @@ public final class MapSchema extends BaseSchema {
     public MapSchema sizeof(int sizeParam) {
 
         this.size = sizeParam;
-        Predicate<Object> fn = x -> {
+        Predicate<Map<?, ?>> fn = x -> {
             if (x == null) {
                 return false;
             }
             Map map = (Map) x;
-            if (map.size() != size) {
+            return !(map.size() != size);
+/*            if (map.size() != size) {
                 return false;
             }
-            return true;
+            return true;*/
         };
         addCheck("sizeof", fn);
         return this;
@@ -50,7 +54,7 @@ public final class MapSchema extends BaseSchema {
             String sKey = entry.getKey();
             var value = entry.getValue();
 
-            BaseSchema<T> schema = (BaseSchema<T>) getSchemasCheck().getOrDefault(sKey, null);
+            BaseSchema<T> schema = (BaseSchema<T>) schemasCheck.getOrDefault(sKey, null);
             if (schema != null && !schema.isValid(value)) {
                 return false;
             }
@@ -58,6 +62,17 @@ public final class MapSchema extends BaseSchema {
         }
         return true;
     }
+
+/*
+    public final boolean shape(Map<String, MapSchema map) {
+        schemasCheck = new HashMap<>(map);
+        return true;
+    }
+*/
+public <T> boolean shape(Map<String, BaseSchema<T>> map) {
+    schemasCheck = new HashMap<>(map);
+    return true;
+}
 
 
 }
