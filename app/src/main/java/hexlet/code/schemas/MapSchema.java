@@ -69,10 +69,10 @@ public final class MapSchema extends BaseSchema<Map<?, ?>> {
         return true;
     }
 */
-public <T> boolean shape(Map<String, BaseSchema<T>> map) {
-    schemasCheck = new HashMap<>(map);
-    return true;
-}
+    public <T> boolean shape(Map<String, BaseSchema<T>> map) {
+        schemasCheck = new HashMap<>(map);
+        return true;
+    }
 
 
 }

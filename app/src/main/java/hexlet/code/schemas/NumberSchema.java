@@ -41,8 +41,8 @@ public final class NumberSchema extends BaseSchema<Integer> {
                     }
                     return value > 0;
                 });
-                    return this;
-                }
+        return this;
+    }
 
     public NumberSchema range(int min, int max) {
         //this.range = true;
