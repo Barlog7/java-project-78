@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 
 public final class MapSchema extends BaseSchema<Map<?, ?>> {
 
-    protected Map<String, ?> schemasCheck;
+    private Map<String, ?> schemasCheck;
     private int size = 0;
 
     public MapSchema() {
@@ -14,9 +14,9 @@ public final class MapSchema extends BaseSchema<Map<?, ?>> {
             if (x == null) {
                 return true;
             }
-            Map map = (Map) x;
+
             if (schemasCheck != null && !schemasCheck.isEmpty()) {
-                return isCheckMapByShechma(map);
+                return isCheckMapByShechma((Map) x);
             }
             return true;
         };
@@ -30,6 +30,7 @@ public final class MapSchema extends BaseSchema<Map<?, ?>> {
             if (x == null) {
                 return false;
             }
+
             Map map = (Map) x;
             return !(map.size() != size);
 

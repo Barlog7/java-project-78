@@ -4,12 +4,6 @@ import java.util.function.Predicate;
 
 public final class NumberSchema extends BaseSchema<Integer> {
 
-    private int minRange = 0;
-    private int maxRange = 0;
-
-    public NumberSchema() {
-    }
-
     public NumberSchema positive() {
         addCheck(
                 "positive",
@@ -23,13 +17,12 @@ public final class NumberSchema extends BaseSchema<Integer> {
     }
 
     public NumberSchema range(int min, int max) {
-        this.minRange = min;
-        this.maxRange = max;
+
         Predicate<Integer> fn = x -> {
             if (x == null) {
                 return false;
             }
-            return !(x < minRange || x > maxRange);
+            return !(x < min || x > max);
         };
         addCheck("range", fn);
         return this;

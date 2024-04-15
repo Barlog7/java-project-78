@@ -20,7 +20,7 @@ public abstract class BaseSchema<T> {
      * @return возвращает схему проверки (В переопределении должен быть один из родительских классов)
      * </p>
      */
-    public BaseSchema required() {
+    public BaseSchema<T> required() {
         Predicate<T> fn = x -> {
             if (x == null) {
                 return false;
