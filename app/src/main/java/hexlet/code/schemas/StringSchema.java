@@ -4,19 +4,13 @@ import java.util.function.Predicate;
 
 public final class StringSchema extends BaseSchema<String> {
 
-    private int minLengthNumber = 0;
-    private String containsText = "";
-
-    public StringSchema() {
-    }
-
     public StringSchema minLength(int minLengthNumberParam) {
-        this.minLengthNumber = minLengthNumberParam;
+        //this.minLengthNumber = minLengthNumberParam;
         Predicate<String> fn = x -> {
             if (x == null) {
                 return false;
             }
-            return !(minLengthNumber != 0 && x.length() < minLengthNumber);
+            return !(minLengthNumberParam != 0 && x.length() < minLengthNumberParam);
 
         };
         addCheck("minLengthNumber", fn);
@@ -25,12 +19,12 @@ public final class StringSchema extends BaseSchema<String> {
 
     public StringSchema contains(String containsTextParam) {
 
-        this.containsText = containsTextParam;
+        //this.containsText = containsTextParam;
         Predicate<String> fn = x -> {
             if (x == null) {
                 return false;
             }
-            return !(!containsText.isEmpty() && !x.contains(containsText));
+            return !(!containsTextParam.isEmpty() && !x.contains(containsTextParam));
 
         };
         addCheck("contains", fn);
